@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ItemFavoritoViewModel>
+
+@inject SignInManager<Usuario> SignInManager
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (Model.Any())
+    {
+        <h1>Meus álbuns / faixas favoritos</h1>
+
+        <div class="accordion" id="accordion-favoritos">
+            @foreach (var item in Model)
+            {
+                <div class="card">
+                    <div class="card-header bg-white" id="heading-@item.Id">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left text-dark collapsed"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#collapse-@item.Id"
+                                    aria-expanded="false"
+                                    aria-controls="collapse-@item.Id">
+                                @item.Descricao
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapse-@item.Id"
+                         class="collapse"
+                         aria-labelledby="heading-@item.Id"
+                         data-parent="#accordion-favoritos">
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                @foreach (var subitem in item.Subitens)
+                                {
+                                    <li class="list-group-item">@subitem.Descricao</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}

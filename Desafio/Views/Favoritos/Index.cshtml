@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AlbumFavoritoViewModel>
+
+@{
+    ViewData["Title"] = "Adicionar/Remover álbuns aos favoritos";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnoLancamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Artista)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnoLancamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Artista)
+                </td>
+                <td>
+                    @if (item.Favorito)
+                    {
+                        <a asp-action="RemoverAlbum" asp-route-id="@item.Id" class="text-danger">Remover dos favoritos</a>
+                    }
+                    else
+                    {
+                        <a asp-action="AdicionarAlbum" asp-route-id="@item.Id" class="text-success">Adicionar aos favoritos</a>
+                    }
+                    | <a asp-action="Faixas" asp-route-id="@item.Id" class="text-secondary">Faixas dos álbuns</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

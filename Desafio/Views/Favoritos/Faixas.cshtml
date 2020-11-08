@@ -1,0 +1,62 @@
+﻿@model IEnumerable<FaixaFavoritaViewModel>
+
+@{
+    ViewData["Title"] = $"Adicionar/Remover faixas do álbum {ViewData["Album"]} aos favoritos";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+
+<p>
+    <a asp-action="Index">Voltar</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duracao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ordem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Album)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duracao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ordem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Album)
+                </td>
+                <td>
+                    @if (item.Favorito)
+                    {
+                        <a asp-action="RemoverFaixa" asp-route-id="@item.Id" class="text-danger">Remover dos favoritos</a>
+                    }
+                    else
+                    {
+                        <a asp-action="AdicionarFaixa" asp-route-id="@item.Id" class="text-success">Adicionar aos favoritos</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
