@@ -1,2 +1,2 @@
 # c-manage-favorite-albums-and-tracks
-Gerencia seus álbuns e faixas favoritas
+Manage favorite albums and tracks
